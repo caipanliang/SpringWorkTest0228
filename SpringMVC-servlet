@@ -1,0 +1,11 @@
+//spring 中配置切面和切点以及切点的织入
+<bean name="logInterceptor"
+class="com.hikvision.cms.demo.basic.common.LogInterceptor"></bean>
+<aop:config>
+<aop:pointcut id="servicePoitcut"
+expression="execution( * com.hikvision.cms.demo.basic.service.*.*(..))"/>
+<aop:aspect id="logAspect" ref="logInterceptor">
+<aop:around pointcut-ref="servicePoitcut" method="DevLog"/>
+<aop:before pointcut-ref="servicePoitcut" method="preDevLog"/>
+</aop:aspect>
+</aop:config>
